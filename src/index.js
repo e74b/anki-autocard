@@ -81,15 +81,30 @@ async function exportDeck(qaPairs) {
 document.addEventListener("DOMContentLoaded", () => {
   let dropTarget = document.getElementById("drop_target");
   let btn = document.getElementById("submit_btn");
+  let fileText = document.getElementById("file_text");
+  let fileInput = document.getElementById("file");
+  console.log(fileInput);
+
+  fileInput.onchange = (e) => {
+    if (e.target.files.length > 0) {
+      if (!e.target.files[0].name.endsWith(".docx")) {
+        alert("Invalid file type: only docx supported");
+        let emptyDatatransfer = new DataTransfer();
+        e.target.files = emptyDatatransfer.files;
+        fileText.innerHTML = "Click to select a file or drop one here";
+      } else {
+        fileText.innerHTML = e.target.files[0].name;
+      }
+    } else {
+      fileText.innerHTML = "Click to select a file or drop one here";
+    }
+  };
+  fileInput.onchange({ target: fileInput });
 
   btn.onclick = main;
 
   dropTarget.addEventListener("dragover", (e) => {
     e.preventDefault();
-  });
-
-  dropTarget.addEventListener("change", (e) => {
-    console.log(e.target.files);
   });
 
   window.addEventListener("dragover", (e) => {
