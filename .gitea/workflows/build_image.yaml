@@ -18,7 +18,7 @@ jobs:
       - name: Registry Login
         uses: docker/login-action@v3
         with:
-          registry: http://10.8.0.1:3000
+          registry: 10.8.0.1:4443
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
 
@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: 10.8.0.1:3000/e74b/anki-autocard:latest
+          tags: 10.8.0.1:4443/e74b/anki-autocard:latest
