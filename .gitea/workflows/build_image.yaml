@@ -12,17 +12,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to Container Registry
-        uses: redhat-actions/podman-login@v1 # Example for a generic registry
+      - name: Buildah Action
+        uses: redhat-actions/buildah-build@v2
         with:
-          username: ${{  secrets.USERNAME  }}
-          password: ${{  secrets.PASSWORD  }}
-          registry: 10.8.0.1:4443 # Replace with your registry
+          image: anki-autocard
+          tags: latest
+          containerfiles: |
+            ./Containerfile
 
-      - name: Build image with Podman
-        run: |
-          podman build -t 10.8.0.1:4443/e74b/anki-autocard:latest .
-
-      - name: Push image to Registry
-        run: |
-          podman push 10.8.0.1:4443/e74b/anki-autocard:latest
+      - name: Push to gitea 
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: anki-autocard
+          tags: latest 
+          registry: 10.8.0.1:4443
+          username: ${{ secrets.USERNAME  }}
+          password: ${{ secrets.PASSWORD }}
