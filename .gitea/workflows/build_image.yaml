@@ -12,19 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Registry Login
-        uses: docker/login-action@v3
+      - name: Log in to Container Registry
+        uses: redhat-actions/podman-login@v1 # Example for a generic registry
         with:
-          registry: 10.8.0.1:4443
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          username: ${{  secrets.USERNAME  }}
+          password: ${{  secrets.PASSWORD  }}
+          registry: 10.8.0.1:4443 # Replace with your registry
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: 10.8.0.1:4443/e74b/anki-autocard:latest
+      - name: Build image with Podman
+        run: |
+          podman build -t 10.8.0.1:4443/e74b/anki-autocard:latest .
+
+      - name: Push image to Registry
+        run: |
+          podman push 10.8.0.1:4443/e74b/anki-autocard:latest
