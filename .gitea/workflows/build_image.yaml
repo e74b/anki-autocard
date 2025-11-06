@@ -7,10 +7,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest-full # Or your preferred runner image
+    runs-on: ubuntu-latest 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update -y
+          sudo apt install buildah podman -y
 
       - name: Buildah Action
         uses: redhat-actions/buildah-build@v2
