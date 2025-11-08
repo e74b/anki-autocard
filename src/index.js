@@ -48,7 +48,13 @@ function matchQAPairs(lines) {
 
 async function getQAPairs() {
   let files = document.getElementById("file").files;
+  if (files.length < 1) {
+    window.alert("Please select a valid file.");
+	  throw "Invalid File!";
+  }
+
   console.log(files);
+
   let file = files[0];
   let fileBuffer = await file.arrayBuffer();
   let textExtract = await mammoth.extractRawText({
@@ -61,8 +67,12 @@ async function getQAPairs() {
     if (!line) return;
     relevantLines.push(line.trim());
   });
-  let qaPairs = matchQAPairs(relevantLines);
-
+  try {
+    let qaPairs = matchQAPairs(relevantLines);
+  } catch {
+    window.alert("Formatting error!");
+	  throw "Formatting error!";
+  }
   return qaPairs;
   document.getElementById("files").files = [];
 }
@@ -128,6 +138,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function main() {
+	try {
   let qaPairs = await getQAPairs();
   await exportDeck(qaPairs);
+	} catch (e) {
+		console.error(e);
+	}
 }

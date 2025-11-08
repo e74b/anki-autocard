@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,11 +25,11 @@ jobs:
           containerfiles: |
             ./Containerfile
 
-      - name: Push to gitea 
+      - name: Push to gitea
         uses: redhat-actions/push-to-registry@v2
         with:
           image: anki-autocard
-          tags: latest 
+          tags: latest
           registry: 10.8.0.1:4443
           username: ${{ secrets.USERNAME  }}
           password: ${{ secrets.PASSWORD }}
