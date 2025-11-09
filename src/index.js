@@ -50,7 +50,7 @@ async function getQAPairs() {
   let files = document.getElementById("file").files;
   if (files.length < 1) {
     window.alert("Please select a valid file.");
-	  throw "Invalid File!";
+    throw "Invalid File!";
   }
 
   console.log(files);
@@ -71,7 +71,7 @@ async function getQAPairs() {
     let qaPairs = matchQAPairs(relevantLines);
   } catch {
     window.alert("Formatting error!");
-	  throw "Formatting error!";
+    throw "Formatting error!";
   }
   return qaPairs;
   document.getElementById("files").files = [];
@@ -138,10 +138,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function main() {
-	try {
-  let qaPairs = await getQAPairs();
-  await exportDeck(qaPairs);
-	} catch (e) {
-		console.error(e);
-	}
+  try {
+    let qaPairs = await getQAPairs();
+    await exportDeck(qaPairs);
+  } catch (e) {
+    console.error(e);
+  }
 }

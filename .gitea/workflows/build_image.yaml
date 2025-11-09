@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Container 
+      - name: Build Container
         uses: redhat-actions/buildah-build@v2
         with:
           image: anki-autocard

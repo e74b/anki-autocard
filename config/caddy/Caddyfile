@@ -1,0 +1,8 @@
+{
+	admin off
+}
+
+:8110 {
+	root * /app/http/
+	file_server
+}
