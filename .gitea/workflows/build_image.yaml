@@ -14,8 +14,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt update -y
-          sudo apt install buildah podman -y
+          apt update -y
+          apt install buildah podman -y
 
       - name: Buildah Action
         uses: redhat-actions/buildah-build@v2
