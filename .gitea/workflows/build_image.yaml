@@ -12,12 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          apt update -y
-          apt install buildah podman -y
-
-      - name: Buildah Action
+      - name: Build Container 
         uses: redhat-actions/buildah-build@v2
         with:
           image: anki-autocard
