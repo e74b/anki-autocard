@@ -1,11 +1,11 @@
 import path from "path";
 import webpack from "webpack";
+import TerserPlugin from "terser-webpack-plugin";
 import { URL } from "node:url";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
 export default {
-  devtool: "eval-cheap-source-map",
   entry: "./src/index.js",
   mode: process.env.NODE_ENV || "development",
   output: {
@@ -32,4 +32,8 @@ export default {
   resolve: {
     extensions: [".ts", ".js"],
   },
+	optimization: {
+		minimize: true,
+		minimizer: [new TerserPlugin()],
+	}
 };

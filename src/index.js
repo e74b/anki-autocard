@@ -19,7 +19,6 @@ function matchQAPairs(lines) {
     let parts = line.split(":");
     let denotion = parts[0].trim().toLowerCase();
     let denotionLimit = line.indexOf(":") + 1;
-    console.log(state, denotion, line);
     if (denotion == "q") {
       if (state == QNA_STATE_QUESTION) throw "Two questions in a row?";
 
@@ -53,8 +52,6 @@ async function getQAPairs() {
     throw "Invalid File!";
   }
 
-  console.log(files);
-
   let file = files[0];
   let fileBuffer = await file.arrayBuffer();
   let textExtract = await mammoth.extractRawText({
@@ -81,7 +78,6 @@ async function exportDeck(qaPairs) {
   let fileName = "Document.docx";
   const apkg = new AnkiExport.default(fileName);
   for (let pair of qaPairs) {
-    console.log(pair);
     apkg.addCard(pair.question, pair.answer);
   }
   let zip = await apkg.save();
@@ -93,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let btn = document.getElementById("submit_btn");
   let fileText = document.getElementById("file_text");
   let fileInput = document.getElementById("file");
-  console.log(fileInput);
 
   fileInput.onchange = (e) => {
     if (e.target.files.length > 0) {
