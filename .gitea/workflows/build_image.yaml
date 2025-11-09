@@ -14,11 +14,7 @@ jobs:
 
       - name: Build Container
         uses: redhat-actions/buildah-build@v2
-        with:
-          image: anki-autocard
-          tags: latest
-          containerfiles: |
-            ./Containerfile
+        exec: podman build . -t anki-autocard -f Containerfile
 
       - name: Push to gitea
         uses: redhat-actions/push-to-registry@v2
