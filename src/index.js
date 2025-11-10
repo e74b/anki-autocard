@@ -66,11 +66,11 @@ async function getQAPairs() {
   });
   try {
     let qaPairs = matchQAPairs(relevantLines);
+  	return qaPairs;
   } catch {
     window.alert("Formatting error!");
     throw "Formatting error!";
   }
-  return qaPairs;
   document.getElementById("files").files = [];
 }
 
