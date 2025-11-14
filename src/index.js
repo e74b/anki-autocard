@@ -66,7 +66,7 @@ async function getQAPairs() {
   });
   try {
     let qaPairs = matchQAPairs(relevantLines);
-  	return qaPairs;
+    return qaPairs;
   } catch {
     window.alert("Formatting error!");
     throw "Formatting error!";
