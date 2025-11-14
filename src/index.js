@@ -133,10 +133,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function main() {
-  try {
-    let qaPairs = await getQAPairs();
+  let qaPairs = await getQAPairs();
+  console.log(qaPairs);
+  if (qaPairs[qaPairs.length - 1] == null) {
+    alert("Document formatting is invalid.");
+  } else {
     await exportDeck(qaPairs);
-  } catch (e) {
-    console.error(e);
   }
 }
