@@ -9,8 +9,8 @@ export default {
   entry: "./src/index.js",
   mode: process.env.NODE_ENV || "development",
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "public/dist/"),
+    filename: "dist/bundle.js",
+    path: path.resolve(__dirname, "public/"),
   },
   plugins: [
     new webpack.DefinePlugin({
