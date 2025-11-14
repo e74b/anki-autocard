@@ -1,0 +1,23 @@
+name: Build Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: podman
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Container
+        run: podman build . -t anki-autocard -f Containerfile
+
+      - name: Login to registry
+        run: podman login 10.8.0.1:4443 --tls-verify=false --username=${{secrets.USERNAME}} --password=${{secrets.PASSWORD}}
+
+      - name: Tag container
+        run: podman tag anki-autocard 10.8.0.1:4443/e74b/anki-autocard:latest
+
+      - name: Push container
+        run: podman push 10.8.0.1:4443/e74b/anki-autocard:ci --tls-verify=false
