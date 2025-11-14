@@ -1,7 +1,7 @@
 FROM node:alpine AS build
 COPY . app
 WORKDIR /app
-RUN npm ci 
+RUN npm install 
 RUN npm run build
 CMD npm run serve
 
